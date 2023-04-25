@@ -15,7 +15,13 @@ export default function Cart() {
               <h2>{name}</h2>
               <p>{description}</p>
               <h3>Price: {price}</h3>
-              <button onClick={() => {}}>REMOVE FROM CART</button>
+              <button
+                onClick={() => {
+                  removeFrom(product, "cart");
+                }}
+              >
+                REMOVE FROM CART
+              </button>
               <hr />
             </li>
           );

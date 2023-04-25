@@ -11,7 +11,14 @@ export function ContentWrapper({ children }) {
       ? setCartData((CartData) => [...CartData, item])
       : setWishlistData((WishlistData) => [...WishlistData, item]);
   }
-  function removeFrom(item, page) {}
+  function removeFrom(item, page) {
+    // console.log(CartData,"---",item)
+    page === "cart"
+      ? setCartData(CartData.filter((thos) => thos.id !== item.id))
+      : setWishlistData(
+          WishlistData.filter((selected) => selected.id !== item.id)
+        );
+  }
 
   return (
     <MainContext.Provider value={{ CartData, WishlistData, addTo, removeFrom }}>
