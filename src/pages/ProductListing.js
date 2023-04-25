@@ -1,8 +1,9 @@
-import { React } from "react";
+import { React, useEffect, useState, useContext } from "react";
 import { fakeFetch } from "../FakeFetch";
-import { useEffect, useState } from "react";
+import { MainContext } from "..";
 
 export default function ProductListing() {
+  const { CartData, addTo } = useContext(MainContext);
   const [ProductData, setProduct] = useState([]);
   const getData = async () => {
     try {
@@ -22,13 +23,22 @@ export default function ProductListing() {
     <div>
       <h1>PRODUCT LISTING PAGE</h1>
       <ul style={{ textAlign: "start", listStyle: "none" }}>
-        {ProductData.map(({ id, name, description, price }) => {
+        {ProductData.map((product) => {
+          const { id, name, description, price } = product;
+
           return (
             <li key={id}>
               <h2>{name}</h2>
               <p>{description}</p>
               <h3>Price: {price}</h3>
-              <button>VISIT ITEM</button>
+              <a href="">View Details</a>
+              <button
+                style={{ alignItems: "flex-end" }}
+                onClick={() => addTo(product, "cart")}
+              >
+                ADD TO CART{" "}
+              </button>
+              <hr />
             </li>
           );
         })}
